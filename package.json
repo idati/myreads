@@ -1,8 +1,16 @@
 {
   "dependencies": {
+    "fs": "0.0.1-security",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-addons-update": "^15.6.0",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.2",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "reflux": "^6.4.1",
+    "start": "^5.1.0"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"
