@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-//import { Link } from 'react-router-dom'
-import * as BooksAPI from './BooksAPI'
-//import PropTypes from 'prop-types'
 import escapeRegExp from 'escape-string-regexp'
-//import ImageInput from './ImageInput'
-//import serializeForm from 'form-serialize'
-//import update from 'react-addons-update'
 
 class BooksSearch extends Component {
 
@@ -19,68 +13,32 @@ updateQuery = (query) => {
 }
 
 handleChange = (event) => {
-  //console.log(BooksAPI.update("nggnmAEACAAJ","Reading"))
-  //console.log(BooksAPI.search("Android"))
-	//console.log(event.target.value)
 	var res=event.target.value.split("___")
-	console.log(res)
 	var filterbook = this.props.books.filter((books) => books.id===res[1])
-	//console.log(BooksAPI)
-	//BooksAPI.update(filterbook, 'read')
-  //console.log("event",filterbook[0], res[1])
-  //console.log(res[0])
-  //console.log("feedbakck: ",BooksAPI.update(filterbook[0],"none"))
-  //console.log(typeof res[0])
-  //BooksAPI.update(filterbook[0], res[0])//'"'+res[0]+'"')
-	if(res[0] !== 'none'){
-		//this.props.setState({Read: [...this.props.state.Read,res[1]]})
-		//this.setState(update(this.props, {Read: {$push: [res[1]]}}))
-		//this.props.updateListChild(res[0], filterbook)
-    this.props.updateListChild(res[0], filterbook[0])
-		console.log(this)
-	}
-	if(res[0]==='none'){
-		//this.props.updateListChild(res[0], filterbook)
-    console.log("book id", this.props.books[0].id)
-    //BooksAPI.update(this.props.books[0].id,"none")
-    //this.props.books.shelf="none"
-    this.props.updateListChild(res[0], filterbook[0])
-		console.log(this)
-	}
-	//this.props.setState()
+  this.props.updateListChild(res[0], filterbook[0])
 }
 
 clearQuery = () => {
 	this.setState({ query: '' })
 }
 searchAll = (match) => {
-  let searchAnswer=this.props.searchBooks(match)
-  //console.log(typeof searchAnswer)
-  //console.log(searchAnswer.value("[[PromiseValue]]"))
+  this.props.searchBooks(match)
   this.clearQuery()
-  console.log("search All Positive")
 }
 
 
 render() {
-	const {books, Reading, wantToRead, Read} = this.props
+	const {books} = this.props
 	const{query} = this.state
 
 	let showingBooks
 	if(query){
 		const match = new RegExp(escapeRegExp(query), 'i')
-    //console.log(BooksAPI.search(match))
-    //this.props.searchBook(match)
-    console.log(match)
     if (books.length > 0){
 		showingBooks = books.filter((book)=>match.test([book.authors, book.title]))
     }
-    //console.log(showingBooks.length)
-    //showingBooks = BooksAPI.search(match)//books.filter((books)=>match.test([books.authors, books.title]))
 	  } else {
-      console.log("books",typeof books)
 		  showingBooks = books
-      //showingBooks = []
   }
 	
 	return(
@@ -89,14 +47,6 @@ render() {
             <div className="search-books-bar">
               <a href='/' className="close-search">Close</a>
               <div className="search-books-input-wrapper">
-                 {/* 
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-                 
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
                 <input 
                 	type="text" 
                 	placeholder="Search by title or author"
@@ -130,7 +80,6 @@ render() {
                           </div>
                           <div className="book-title">{books.title}</div>
                           <div className="book-authors">{books.authors}</div>
-                          <div className="book-id">{books.id}</div>
                         </div>
                       </li>
                       ))}
