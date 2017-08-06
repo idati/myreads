@@ -55,7 +55,8 @@ clearQuery = () => {
 }
 searchAll = (match) => {
   let searchAnswer=this.props.searchBooks(match)
-  //console.log(searchAnswer[1].error)
+  //console.log(typeof searchAnswer)
+  //console.log(searchAnswer.value("[[PromiseValue]]"))
   this.clearQuery()
   console.log("search All Positive")
 }
@@ -74,11 +75,14 @@ render() {
     if (books.length > 0){
 		showingBooks = books.filter((book)=>match.test([book.authors, book.title]))
     }
-    console.log(showingBooks.length)
+    //console.log(showingBooks.length)
     //showingBooks = BooksAPI.search(match)//books.filter((books)=>match.test([books.authors, books.title]))
-	} else {
-		showingBooks = books
-	}
+	  } else {
+      console.log("books",typeof books)
+		  showingBooks = books
+      //showingBooks = []
+  }
+	
 	return(
       <div className="app">      
           <div className="search-books">
@@ -100,7 +104,7 @@ render() {
                 	onChange={(event) => this.updateQuery(event.target.value)}
                 />             
               </div>
-              <button onClick={() => this.searchAll(this.state.query)}>Search All</button>
+              <button onClick={() =>  this.searchAll(this.state.query)}>Search All</button>
             </div>
             <div className="search-books-results">
               <ol className="books-grid"></ol>
@@ -108,9 +112,10 @@ render() {
           </div>
           <div className="bookshelf-books">
                     <ol className="books-grid">
-                    {showingBooks.map((books) =>(
+                    { 
+                      showingBooks.map((books) =>(
                       <li key={books.id}>
-                        <div className="book" style={{background: '#ddd'}}>
+                        <div className="book">
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193,  backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
                             <div className="book-shelf-changer">
