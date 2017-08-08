@@ -52,9 +52,6 @@ class BooksApp extends React.Component {
     var filterbook = this.state.books.filter((books) => books.id===res.id)
     if (filterbook.length > 0){
       BooksAPI.update(filterbook[0], status)
-      // BooksAPI.getAll().then((books) => {
-      // this.setState({books})
-      // })
     }
   }
 

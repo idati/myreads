@@ -1,8 +1,8 @@
 This is a Udacity Project "My Reads: A Book Tracking App", check out at www.udacity.com
 
-It should teach the React Fundamentals by doing this Project. My personal experience was very good. I gives a good start to learn React.
+It should teach the React Fundamentals by doing this Project. My personal experience was very good. It gives a good start to learn React.
 
-If you like to see the result please check if you have installed notes, mpn abd git. 
+If you like to see the result please check if you have installed notes, mpn and git. 
 If so go on with
 
 1) git clone https://github.com/idati/myreads.git
@@ -13,7 +13,7 @@ If so go on with
 
 4) mpn start
 
-
+##
 Remember that good React design practice is to create new JS files for each component and use import/require statements to include them where they are needed.
 
 ## Backend Server
