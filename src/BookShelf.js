@@ -104,7 +104,7 @@ handleChange = (event) => {
               </div>
             </div>
             <div className="open-search">
-              <a href='/search' onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+              <a href='/search' onClick={() => this.props.empty}>Add a book</a>
             </div>
           </div>
       

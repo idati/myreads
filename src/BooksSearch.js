@@ -10,6 +10,8 @@ state = {
 
 updateQuery = (query) => {
 	this.setState({query: query.trim() })
+  this.props.searchBooks(query)
+
 }
 
 handleChange = (event) => {
@@ -21,24 +23,21 @@ handleChange = (event) => {
 clearQuery = () => {
 	this.setState({ query: '' })
 }
-searchAll = (match) => {
-  this.props.searchBooks(match)
-  this.clearQuery()
-}
+
 
 
 render() {
 	const {books} = this.props
 	const{query} = this.state
 
-	let showingBooks
+	let showingBooks = []
 	if(query){
 		const match = new RegExp(escapeRegExp(query), 'i')
-    if (books.length > 0){
-		showingBooks = books.filter((book)=>match.test([book.authors, book.title]))
-    }
-	  } else {
-		  showingBooks = books
+    console.log(match)
+     if (books.length > 0){
+		  showingBooks = books.filter((book)=>match.test([book.authors, book.title]))
+      // showingBooks = this.props.searchBooks(query)
+     }
   }
 	
 	return(
@@ -54,7 +53,6 @@ render() {
                 	onChange={(event) => this.updateQuery(event.target.value)}
                 />             
               </div>
-              <button onClick={() =>  this.searchAll(this.state.query)}>Search All</button>
             </div>
             <div className="search-books-results">
               <ol className="books-grid"></ol>

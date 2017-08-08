@@ -24,9 +24,7 @@ class BooksApp extends React.Component {
   }
 
   refresh = () => {
-    BooksAPI.getAll().then((books) => {
-      this.setState({books})
-    })    
+    this.setState({books: []})  
   }
 
   searchBooks = (match) => {
@@ -34,7 +32,11 @@ class BooksApp extends React.Component {
     let check
     searchAnswer.then(
       function(value){
+        if (value !== undefined){
         check = value.error
+      } else {
+        check='empty query'
+      }
       }).then(() => {
         if (check !== 'empty query'){
           searchAnswer.then((books) => {
@@ -50,9 +52,9 @@ class BooksApp extends React.Component {
     var filterbook = this.state.books.filter((books) => books.id===res.id)
     if (filterbook.length > 0){
       BooksAPI.update(filterbook[0], status)
-      BooksAPI.getAll().then((books) => {
-      this.setState({books})
-      })
+      // BooksAPI.getAll().then((books) => {
+      // this.setState({books})
+      // })
     }
   }
 
@@ -63,6 +65,7 @@ class BooksApp extends React.Component {
         <Route exact path='/' render={() => (
           <BookShelf 
             updateListChild={this.updateList}
+            refresh={this.refresh}
             books={this.state.books}    
           />
           )}/>
