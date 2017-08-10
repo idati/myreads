@@ -36,7 +36,6 @@ render() {
     console.log(match)
      if (books.length > 0){
 		  showingBooks = books.filter((book)=>match.test([book.authors, book.title]))
-      // showingBooks = this.props.searchBooks(query)
      }
   }
 	
@@ -78,6 +77,7 @@ render() {
                           </div>
                           <div className="book-title">{books.title}</div>
                           <div className="book-authors">{books.authors}</div>
+                          <div className="book-status">status: {books.shelf}</div>
                         </div>
                       </li>
                       ))}

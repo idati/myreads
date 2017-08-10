@@ -13,6 +13,7 @@ class BooksApp extends React.Component {
     this.state = {
       books: [],
     }
+
   }
 
   
@@ -23,31 +24,8 @@ class BooksApp extends React.Component {
 
   }
 
-  refresh = () => {
-    this.setState({books: []})  
-  }
 
-  searchBooks = (match) => {
-    let searchAnswer = BooksAPI.search(match)
-    let check
-    searchAnswer.then(
-      function(value){
-        if (value !== undefined){
-        check = value.error
-      } else {
-        check='empty query'
-      }
-      }).then(() => {
-        if (check !== 'empty query'){
-          searchAnswer.then((books) => {
-          this.setState({books})
-        })} else {
-          this.refresh()
-      }})
-    return searchAnswer
-  }
-
-  updateList = (status, res) => {
+    updateList = (status, res) => {
     BooksAPI.update(res,status)
     var filterbook = this.state.books.filter((books) => books.id===res.id)
     if (filterbook.length > 0){
@@ -57,6 +35,51 @@ class BooksApp extends React.Component {
     this.setState({books})
     })
   }
+
+  refresh = () => {
+    this.setState({books: []})  
+  }
+
+  searchBooks = (match) => {
+    const searchAnswer = BooksAPI.search(match)
+    let check
+    let thisbooks = this.state.books
+    let thisfetch = this.state.books.shelf
+    let yn='no'
+    searchAnswer.then(
+      function(value){
+         if (value !== undefined){
+           check = value.error
+          for (var j=0;j<value.length;j++){
+            const resu = value[j]
+           for(var i=0;i<thisbooks.length;i++){
+            if(thisbooks[i].id === value[j].id){
+              yn='yes'
+              resu.shelf=thisbooks[i].shelf
+            }
+           }
+           if(yn==='no'){
+            resu.shelf='none'
+           }
+           yn='no'
+         }
+         } else {
+           check='empty query'
+         }
+
+      }).then(() => {
+        if (check !== 'empty query'){
+           for(var i=0;i<thisbooks.length;i++){
+         }
+          searchAnswer.then((books) => {
+          this.setState({books})
+         })
+      } else {
+          this.refresh()
+      }})
+    return searchAnswer
+  }
+
 
 
   render() {

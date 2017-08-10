@@ -123,12 +123,14 @@ body, .app {
   width: 140px;
 }
 .book-title,
+.book-status,
 .book-authors {
   font-size: 0.8em;
 }
 .book-title {
   margin-top: 10px;
 }
+.book-authors,
 .book-authors {
   color: #999;
 }
