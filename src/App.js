@@ -24,17 +24,27 @@ class BooksApp extends React.Component {
 
   }
 
+  updateList = (book, value) => {
+    book.shelf=value
 
-    updateList = (status, res) => {
-    BooksAPI.update(res,status)
-    var filterbook = this.state.books.filter((books) => books.id===res.id)
-    if (filterbook.length > 0){
-      BooksAPI.update(filterbook[0], status)
-    }
-    BooksAPI.getAll().then((books) => {
-    this.setState({books})
+    BooksAPI.update(book, value).then(res => {
+      this.setState(state => ({
+        books: state.books.filter(b => b.id !== book.id).concat([ book ])
+      }))
     })
   }
+
+
+  // updateList = (status, res) => {
+  //   BooksAPI.update(res,status)
+  //   var filterbook = this.state.books.filter((books) => books.id===res.id)
+  //   if (filterbook.length > 0){
+  //     BooksAPI.update(filterbook[0], status)
+  //   }
+  //   BooksAPI.getAll().then((books) => {
+  //   this.setState({books})
+  //   })
+  // }
 
   refresh = () => {
     this.setState({books: []})  

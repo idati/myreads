@@ -17,7 +17,8 @@ updateQuery = (query) => {
 handleChange = (event) => {
 	var res=event.target.value.split("___")
 	var filterbook = this.props.books.filter((books) => books.id===res[1])
-  this.props.updateListChild(res[0], filterbook[0])
+  this.props.updateListChild(filterbook[0], res[0])
+
 }
 
 clearQuery = () => {
